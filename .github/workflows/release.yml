@@ -1,4 +1,4 @@
-name: CI & Release
+name: Build & Release
 
 on:
   push:
@@ -10,9 +10,12 @@ on:
 
 jobs:
   build:
+    name: Build, Test & Lint
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version: 22
@@ -23,17 +26,20 @@ jobs:
       - run: npm run build
 
   release:
-    needs: build
+    name: Release to npm & GitHub
     runs-on: ubuntu-latest
+    needs: build
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version: 22
           registry-url: https://registry.npmjs.org/
       - run: npm ci
-      - name: Release to npm & GitHub
+      - name: Semantic Release
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: npm run release
