@@ -1,0 +1,24 @@
+npm test
+
+STAGED_FILES=$(git diff --cached --name-only --diff-filter=ACMR)
+
+# Step 1: Prettier auto fix
+echo "$STAGED_FILES" | grep -E '\.(js|jsx|ts|tsx|json|md|css|html)$' \
+  | xargs --no-run-if-empty npx prettier --write --ignore-unknown
+
+# Step 2: ESLint auto fix
+echo "$STAGED_FILES" | grep -E '\.(js|jsx|ts|tsx)$' \
+  | xargs --no-run-if-empty npx eslint --fix --quiet
+
+# Step 3: Add fixed files again to index
+echo "$STAGED_FILES" | xargs git add
+
+# Step 4: Final ESLint check - block commit on unfixable issues
+echo "$STAGED_FILES" | grep -E '\.(js|jsx|ts|tsx)$' \
+  | xargs --no-run-if-empty npx eslint --max-warnings=0 || exit 1
+
+# Step 5: TypeScript check - block commit on type errors
+npx tsc --noEmit || exit 1
+
+# Step 6: Update index
+git update-index --again

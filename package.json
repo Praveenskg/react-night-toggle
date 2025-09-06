@@ -1,0 +1,79 @@
+{
+  "name": "react-night-toggle",
+  "version": "1.0.0",
+  "description": "A modern dark mode toggle for ReactJs with smooth animations.",
+  "keywords": [
+    "react",
+    "dark-mode",
+    "toggle",
+    "switch",
+    "theme",
+    "react-component",
+    "ui"
+  ],
+  "author": "Praveen Singh",
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "start": "tsup src/index.tsx --watch --format cjs,esm",
+    "build": "tsup src/index.tsx --format cjs,esm --dts",
+    "test": "vitest",
+    "lint": "eslint src --ext .ts,.tsx",
+    "format": "prettier --write .",
+    "prepare": "husky",
+    "release": "semantic-release"
+  },
+  "peerDependencies": {
+    "react": ">=17 <=19",
+    "react-dom": ">=17 <=19"
+  },
+  "dependencies": {
+    "lucide-react": "^0.542.0",
+    "motion": "^12.23.12"
+  },
+  "devDependencies": {
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/npm": "^12.0.2",
+    "@testing-library/jest-dom": "^6.8.0",
+    "@testing-library/react": "^16.3.0",
+    "@testing-library/user-event": "^14.6.1",
+    "@types/jest": "^30.0.0",
+    "@types/react": "^19.1.12",
+    "@types/react-dom": "^19.1.9",
+    "@typescript-eslint/eslint-plugin": "^8.42.0",
+    "@typescript-eslint/parser": "^8.42.0",
+    "@vitejs/plugin-react": "^5.0.2",
+    "eslint": "^9.35.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-define-config": "^2.1.0",
+    "eslint-plugin-react": "^7.37.5",
+    "husky": "^9.1.7",
+    "jsdom": "^26.1.0",
+    "prettier": "^3.6.2",
+    "semantic-release": "^24.2.7",
+    "tsup": "^8.5.0",
+    "typescript": "^5.9.2",
+    "vitest": "^3.2.4"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/praveenskg/react-night-toggle"
+  },
+  "bugs": {
+    "url": "https://github.com/praveenskg/react-night-toggle/issues"
+  },
+  "homepage": "https://github.com/praveenskg/react-night-toggle#readme"
+}
