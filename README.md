@@ -39,7 +39,7 @@ pnpm add react-night-toggle
 
 ## 🔧 Usage
 
-### Basic Example
+### 1️⃣ Basic Usage Example
 
 ```tsx
 import { useState } from 'react';
@@ -64,7 +64,7 @@ export default function App() {
 }
 ```
 
-### Custom Icons Example
+### 2️⃣ Custom Icons Example
 
 You can pass your own icons instead of the default **Sun/Moon**:
 
@@ -93,21 +93,88 @@ export default function App() {
 }
 ```
 
+### 3️⃣ Follow System Theme Example
+
+You can automatically follow the user’s system color scheme by setting `followSystem` to `true`:
+
+```tsx
+import { useState } from 'react';
+import { DarkModeSwitch } from 'react-night-toggle';
+
+export default function App() {
+  const [dark, setDark] = useState(false);
+
+  return (
+    <div>
+      <DarkModeSwitch followSystem checked={dark} onChange={setDark} size={40} />
+      <h2>{dark ? 'Dark Mode Enabled 🌙' : 'Light Mode Enabled ☀️'}</h2>
+    </div>
+  );
+}
+```
+
+### 4️⃣ Colored Sun & Moon Example
+
+You can customize the colors of the **Sun** and **Moon** icons:
+
+```tsx
+import { useState } from 'react';
+import { DarkModeSwitch } from 'react-night-toggle';
+
+export default function App() {
+  const [dark, setDark] = useState(false);
+
+  return (
+    <div>
+      <DarkModeSwitch
+        checked={dark}
+        onChange={setDark}
+        size={56}
+        sunColor="orange"
+        moonColor="blueviolet"
+      />
+      <h2>{dark ? 'Dark Mode Enabled 🌙' : 'Light Mode Enabled ☀️'}</h2>
+    </div>
+  );
+}
+```
+
+### 5️⃣ Large Toggle Example
+
+You can increase the size of the toggle button by passing a numeric value or a string:
+
+```tsx
+import { useState } from 'react';
+import { DarkModeSwitch } from 'react-night-toggle';
+
+export default function App() {
+  const [dark, setDark] = useState(false);
+
+  return (
+    <div>
+      <DarkModeSwitch checked={dark} onChange={setDark} size={72} />
+      <h2>{dark ? 'Dark Mode Enabled 🌙' : 'Light Mode Enabled ☀️'}</h2>
+    </div>
+  );
+}
+```
+
 ✨ This way you can use **any React node** (Lucide, Material UI, custom SVGs, etc.) for icons.
 
 ---
 
 ## ⚙️ Props
 
-| Prop        | Type                         | Default        | Description                                                            |
-| ----------- | ---------------------------- | -------------- | ---------------------------------------------------------------------- |
-| `checked`   | `boolean`                    | — (required)   | Whether dark mode is active (`true` = dark, `false` = light).          |
-| `onChange`  | `(checked: boolean) => void` | — (required)   | Callback fired when the toggle is switched.                            |
-| `size`      | `number \| string`           | `24`           | Size of the toggle button (applied to both icons).                     |
-| `lightIcon` | `React.ReactNode`            | `<Sun />`      | Custom icon for light mode.                                            |
-| `darkIcon`  | `React.ReactNode`            | `<Moon />`     | Custom icon for dark mode.                                             |
-| `sunColor`  | `string`                     | `currentColor` | Color of the default **Sun** icon. Ignored if `lightIcon` is provided. |
-| `moonColor` | `string`                     | `currentColor` | Color of the default **Moon** icon. Ignored if `darkIcon` is provided. |
+| Prop           | Type                         | Default        | Description                                                                                  |
+| -------------- | ---------------------------- | -------------- | -------------------------------------------------------------------------------------------- |
+| `checked`      | `boolean`                    | — (required)   | Whether dark mode is active (`true` = dark, `false` = light).                                |
+| `onChange`     | `(checked: boolean) => void` | — (required)   | Callback fired when the toggle is switched.                                                  |
+| `size`         | `number \| string`           | `24`           | Size of the toggle button (applied to both icons).                                           |
+| `lightIcon`    | `React.ReactNode`            | `<Sun />`      | Custom icon for light mode.                                                                  |
+| `darkIcon`     | `React.ReactNode`            | `<Moon />`     | Custom icon for dark mode.                                                                   |
+| `sunColor`     | `string`                     | `currentColor` | Color of the default **Sun** icon. Ignored if `lightIcon` is provided.                       |
+| `moonColor`    | `string`                     | `currentColor` | Color of the default **Moon** icon. Ignored if `darkIcon` is provided.                       |
+| `followSystem` | `boolean`                    | `false`        | Automatically follow the user’s system color scheme. Overrides `checked` when set to `true`. |
 
 ---
 

@@ -1,5 +1,6 @@
 'use client';
 import * as React from 'react';
+import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Sun, Moon } from 'lucide-react';
 
@@ -11,6 +12,7 @@ export interface DarkModeSwitchProps {
   darkIcon?: React.ReactNode;
   sunColor?: string;
   moonColor?: string;
+  followSystem?: boolean;
 }
 
 export const DarkModeSwitch: React.FC<DarkModeSwitchProps> = ({
@@ -21,7 +23,24 @@ export const DarkModeSwitch: React.FC<DarkModeSwitchProps> = ({
   darkIcon,
   sunColor = 'currentColor',
   moonColor = 'currentColor',
+  followSystem = false,
 }) => {
+  useEffect(() => {
+    if (!followSystem) return;
+
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+
+    const handleChange = (e: MediaQueryListEvent) => {
+      onChange(e.matches);
+    };
+
+    onChange(mediaQuery.matches);
+
+    mediaQuery.addEventListener('change', handleChange);
+
+    return () => mediaQuery.removeEventListener('change', handleChange);
+  }, [followSystem, onChange]);
+
   const toggle = () => onChange(!checked);
 
   const Light = lightIcon ?? <Sun size={size} color={sunColor} />;
