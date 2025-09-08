@@ -8,7 +8,10 @@
     [
       "@semantic-release/npm",
       {
-        "npmPublish": true
+        "npmPublish": true,
+        "tarballDir": "dist",
+        "pkgRoot": ".",
+        "publishCmd": "npm publish --provenance"
       }
     ],
     [
