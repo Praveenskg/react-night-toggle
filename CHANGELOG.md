@@ -1,3 +1,9 @@
+# [1.2.0](https://github.com/praveenskg/react-night-toggle/compare/v1.1.1...v1.2.0) (2025-09-08)
+
+### Features
+
+- add followSystem prop to DarkModeSwitch for automatic theme switching and update README with full examples ([62d75ff](https://github.com/praveenskg/react-night-toggle/commit/62d75fff667a3ed912a3e00109b26b8f67ea53e7))
+
 # [1.1.0](https://github.com/praveenskg/react-night-toggle/compare/v1.0.0...v1.1.0) (2025-09-08)
 
 ### Features
