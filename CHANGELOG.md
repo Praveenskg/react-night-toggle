@@ -1,3 +1,9 @@
+# [1.1.0](https://github.com/praveenskg/react-night-toggle/compare/v1.0.0...v1.1.0) (2025-09-08)
+
+### Features
+
+- **dark-mode-switch:** add customizable sunColor and moonColor props with defaults ([d53182d](https://github.com/praveenskg/react-night-toggle/commit/d53182db6a9fb164016c4b3fdc6002386f82842b))
+
 # 1.0.0 (2025-09-06)
 
 ### Bug Fixes
