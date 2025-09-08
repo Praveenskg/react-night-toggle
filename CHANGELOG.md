@@ -1,3 +1,9 @@
+## [1.2.1](https://github.com/praveenskg/react-night-toggle/compare/v1.2.0...v1.2.1) (2025-09-08)
+
+### Bug Fixes
+
+- **types:** ensure index.d.ts is emitted in dist folder for package exports ([2e7cd67](https://github.com/praveenskg/react-night-toggle/commit/2e7cd671f7315eb64ab4e8352582c14fabd3aa78))
+
 # [1.2.0](https://github.com/praveenskg/react-night-toggle/compare/v1.1.1...v1.2.0) (2025-09-08)
 
 ### Features
