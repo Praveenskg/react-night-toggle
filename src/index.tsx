@@ -9,6 +9,8 @@ export interface DarkModeSwitchProps {
   size?: number | string;
   lightIcon?: React.ReactNode;
   darkIcon?: React.ReactNode;
+  sunColor?: string;
+  moonColor?: string;
 }
 
 export const DarkModeSwitch: React.FC<DarkModeSwitchProps> = ({
@@ -17,11 +19,13 @@ export const DarkModeSwitch: React.FC<DarkModeSwitchProps> = ({
   size = 24,
   lightIcon,
   darkIcon,
+  sunColor = 'currentColor',
+  moonColor = 'currentColor',
 }) => {
   const toggle = () => onChange(!checked);
 
-  const Light = lightIcon ?? <Sun size={size} />;
-  const Dark = darkIcon ?? <Moon size={size} />;
+  const Light = lightIcon ?? <Sun size={size} color={sunColor} />;
+  const Dark = darkIcon ?? <Moon size={size} color={moonColor} />;
 
   return (
     <div
