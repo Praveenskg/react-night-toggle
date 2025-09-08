@@ -8,7 +8,7 @@ import copy from 'copy-to-clipboard';
 
 export default function App() {
   const [dark, setDark] = useState(false);
-  const [copiedIdx, setCopiedIdx] = useState<number | null>(null); // Track which example was copied
+  const [copiedIdx, setCopiedIdx] = useState<number | null>(null);
   const codeStyle = dark ? oneDark : oneLight;
 
   const toggleDarkMode = (checked: boolean) => setDark(checked);
@@ -56,6 +56,34 @@ export default function App() {
       onChange={toggleDarkMode}
       lightIcon={<CloudSun />}
       darkIcon={<SunMoon />}
+    />
+  );
+}`,
+    },
+    {
+      title: 'Follow System Theme',
+      element: (
+        <DarkModeSwitch
+          checked={dark}
+          onChange={toggleDarkMode}
+          // followSystem
+          size={40}
+        />
+      ),
+      code: `import { useState } from 'react';
+import { DarkModeSwitch } from 'react-night-toggle';
+import { CloudSun, SunMoon } from 'lucide-react';
+
+export default function App() {
+  const [dark, setDark] = useState(false);
+  const toggleDarkMode = (checked: boolean) => setDark(checked);
+
+  return (
+    <DarkModeSwitch
+      checked={dark}
+      onChange={toggleDarkMode}
+      followSystem
+      size={40}
     />
   );
 }`,
