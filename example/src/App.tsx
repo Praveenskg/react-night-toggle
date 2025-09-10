@@ -1,7 +1,7 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { DarkModeSwitch } from 'react-night-toggle';
-import { CloudSun, Moon, Sun, SunMoon, Copy, Check } from 'lucide-react';
+import { CloudSun, Moon, Sun, SunMoon, Copy, Check, Github } from 'lucide-react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { oneDark, oneLight } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import copy from 'copy-to-clipboard';
@@ -9,9 +9,30 @@ import copy from 'copy-to-clipboard';
 export default function App() {
   const [dark, setDark] = useState(false);
   const [copiedIdx, setCopiedIdx] = useState<number | null>(null);
-  const codeStyle = dark ? oneDark : oneLight;
 
-  const toggleDarkMode = (checked: boolean) => setDark(checked);
+  useEffect(() => {
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+      setDark(true);
+      document.documentElement.classList.add('dark');
+    } else {
+      setDark(false);
+      document.documentElement.classList.remove('dark');
+    }
+  }, []);
+
+  const toggleDarkMode = (checked: boolean) => {
+    setDark(checked);
+    if (checked) {
+      localStorage.setItem('theme', 'dark');
+      document.documentElement.classList.add('dark');
+    } else {
+      localStorage.setItem('theme', 'light');
+      document.documentElement.classList.remove('dark');
+    }
+  };
+
+  const codeStyle = dark ? oneDark : oneLight;
 
   const examples = [
     {
@@ -72,7 +93,6 @@ export default function App() {
       ),
       code: `import { useState } from 'react';
 import { DarkModeSwitch } from 'react-night-toggle';
-import { CloudSun, SunMoon } from 'lucide-react';
 
 export default function App() {
   const [dark, setDark] = useState(false);
@@ -146,9 +166,32 @@ export default function App() {
 
   return (
     <div
-      className={`min-h-screen w-full flex flex-col items-center gap-12 px-6 py-12 transition-colors duration-500 ${dark ? 'bg-gray-900 text-white' : 'bg-white text-gray-900'}`}
+      className={`min-h-screen w-full flex flex-col items-center gap-12 px-6 py-12 transition-colors duration-500 ${
+        dark ? 'bg-gray-900 text-white' : 'bg-white text-gray-900'
+      }`}
     >
-      <div className="text-center space-y-3">
+      <nav className="fixed top-0 z-50 w-full bg-white/70 dark:bg-gray-900/70 backdrop-blur-md shadow-lg border-b border-gray-200 dark:border-gray-700">
+        <div className="mx-auto flex items-center justify-between px-4 md:px-8 py-3">
+          <a
+            href="/"
+            className="text-2xl font-extrabold bg-linear-to-r from-purple-500 via-pink-500 to-yellow-500 bg-clip-text text-transparent tracking-tight hover:scale-105 transition-transform duration-300"
+          >
+            react-night-toggle
+          </a>
+          <div className="flex items-center space-x-4">
+            <DarkModeSwitch checked={dark} onChange={toggleDarkMode} size={26} sunColor="#ffffff" />
+            <a
+              href="https://github.com/Praveenskg/react-night-toggle"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors duration-300"
+            >
+              <Github className=" text-gray-700 dark:text-gray-200" />
+            </a>
+          </div>
+        </div>
+      </nav>
+      <div className="text-center space-y-3 mt-16">
         <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight">React Night Toggle</h1>
         <p className="text-lg md:text-xl">
           A modern dark mode switch for React with smooth animations and custom icons.
@@ -176,7 +219,9 @@ export default function App() {
           {examples.map((ex, idx) => (
             <div
               key={idx}
-              className={`p-6 rounded-xl shadow-md space-y-4 transition-colors duration-500 ${dark ? 'bg-gray-800 text-gray-100' : 'bg-white text-gray-900'}`}
+              className={`p-6 rounded-xl shadow-md space-y-4 transition-colors duration-500 ${
+                dark ? 'bg-gray-800 text-gray-100' : 'bg-white text-gray-900'
+              }`}
             >
               <h3 className="font-semibold text-lg">{`${idx + 1}️⃣ ${ex.title}`}</h3>
               {ex.element}
